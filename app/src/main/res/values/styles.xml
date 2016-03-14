@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.NoActionBar">
+
+    </style>
+
+    <style name="dialer_button">
+        <item name="android:layout_width">@dimen/dialer_button_size</item>
+        <item name="android:layout_height">@dimen/dialer_button_size</item>
+        <item name="android:layout_margin">@dimen/dialer_button_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/dialer</item>
+        <item name="android:background">@drawable/circle</item>
+    </style>
+</resources>

@@ -1,6 +1,8 @@
-package com.fangstar.diagnostic.ui;
+package com.fangstar.diagnostic;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -9,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fangstar.diagnostic.R;
+import com.fangstar.diagnostic.ui.PageScrollView;
 
 /**
  * Created at 2016/3/14.
@@ -18,6 +20,7 @@ import com.fangstar.diagnostic.R;
  */
 public class DialerFragment extends Fragment implements View.OnClickListener{
     private TextView mNumber;
+    private long dialTime;
 
     @Nullable
     @Override
@@ -79,6 +82,15 @@ public class DialerFragment extends Fragment implements View.OnClickListener{
             case R.id.back:
                 removeLast();
                 break;
+            case R.id.call:
+                String num = mNumber.getText().toString();
+                if(num.length() == 11) {
+                    Intent intent = new Intent(Intent.ACTION_CALL,
+                            Uri.parse("tel:" + num));
+                    startActivity(intent);
+                    dialTime = System.currentTimeMillis();
+                }
+                break;
         }
     }
 
@@ -95,5 +107,15 @@ public class DialerFragment extends Fragment implements View.OnClickListener{
             return;
         Editable e = mNumber.getEditableText().delete(len - 1, len);
         mNumber.setText(e);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(dialTime != 0 && System.currentTimeMillis() - dialTime> 2000) {
+            PageScrollView pager = (PageScrollView)getActivity().findViewById(R.id.pager);
+            pager.scrollToPage(0);
+            dialTime = 0;
+        }
     }
 }

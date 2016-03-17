@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<com.fangstar.diagnostic.ui.PageScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/pager"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <fragment
-        android:tag="dialer"
-        android:name="com.fangstar.diagnostic.ui.DialerFragment"
+        android:tag="list"
+        android:name="com.fangstar.diagnostic.ListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</LinearLayout>
+    <fragment
+        android:tag="dialer"
+        android:name="com.fangstar.diagnostic.DialerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</com.fangstar.diagnostic.ui.PageScrollView>
